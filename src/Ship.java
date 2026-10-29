@@ -1,9 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
-class Ship extends JButton{
-		
+class Ship extends JButton implements ActionListener {
+
 	private int x, y;
 	/**
 	 * Constructor for the Ship class 
@@ -12,11 +14,22 @@ class Ship extends JButton{
 
 		x = 100;
 		y = 100;
+
+
 		setLocation(x,y);
-		setSize(50, 50);
+		setSize(100, 100);
 
 				
 	}
+
+    public void update() {
+
+
+
+        while (getWidth() > 10) {
+            setSize(getWidth() - 1, getHeight() - 1);
+        }
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -40,6 +53,10 @@ class Ship extends JButton{
 		y = rand.nextInt(Ball.FRAMEHEIGHT - this.getHeight());
 		setLocation(x, y);
 	}
-	
-	
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }

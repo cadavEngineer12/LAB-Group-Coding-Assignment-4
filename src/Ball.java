@@ -39,11 +39,12 @@ public class Ball extends JPanel{
 	int dx = 2;
 	int dy = 3;
 
-	
 	/**
 	 * Constructor for the SpaceShip class loads and displays the frame
 	 */
 	public Ball(){
+
+
 		frame = new JFrame();
 		actionPanel = new JPanel();
 		playArea = new JPanel();
@@ -156,6 +157,7 @@ public class Ball extends JPanel{
 			public void actionPerformed(ActionEvent e)
 			{
 				ship.bounceShip(dx, dy);
+                ship.update();
 				playArea.paintImmediately(playArea.getVisibleRect());
 						
 				//sleep the thread to slow down the movement
