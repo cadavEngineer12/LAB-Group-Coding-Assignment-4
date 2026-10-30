@@ -2,61 +2,51 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
+
+/**
+ * class for painting the ball and shrinking it
+ * @author Charles
+ */
 class Ship extends JButton implements ActionListener {
+    Timer timer;
+    private int x, y;
 
-	private int x, y;
-	/**
-	 * Constructor for the Ship class 
-	 */
-	public Ship(){
-
-		x = 100;
-		y = 100;
-
-
-		setLocation(x,y);
-		setSize(100, 100);
-
-				
-	}
-
-    public void update() {
-
-
-
-        while (getWidth() > 10) {
-            setSize(getWidth() - 1, getHeight() - 1);
-        }
+    public Ship(){
+        x = 100;
+        y = 100;
+        setLocation(x,y);
+        setSize(100, 100);
     }
+
+
+    // Method that shrinks the ball to a specific size for timed animation
+    public void setBallSize(int newSize) {
+        if (newSize < 10) newSize = 10;
+        setSize(newSize, newSize);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.RED);
         g.fillOval(0, 0, getWidth(), getHeight());
     }
-	
-	public void bounceShip(int dx, int dy){
-		x = x + dx;
-		y = y + dy;
-		super.setLocation(x, y);
-	}
-	
-	/**
-	 * Method to move the ship to a random location on the screen
-	 */
-	public void moveShip(){
-		Random rand = new Random();
-		
-		x = rand.nextInt(Ball.FRAMEWIDTH - this.getWidth());
-		y = rand.nextInt(Ball.FRAMEHEIGHT - this.getHeight());
-		setLocation(x, y);
-	}
 
+    public void bounceShip(int dx, int dy){
+        x = x + dx;
+        y = y + dy;
+        super.setLocation(x, y);
+    }
+
+
+    public void resetPosition() {
+        x = 100;
+        y = 100;
+        setLocation(x,y);
+        setSize(100,100);
+    }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    public void actionPerformed(ActionEvent e) {}
 }
